@@ -1,7 +1,8 @@
+use rand::Rng;
 use std::io::Write;
 
 fn main() {
-    let target: i32 = 14;
+    let target: i32 = rand::thread_rng().gen_range(0..100);
     loop {
         let mut s = String::new();
 
@@ -11,17 +12,13 @@ fn main() {
         let guess = s.trim_end();
 
         match guess.parse::<i32>() {
-            Ok(n) => {
-                if n < target {
-                    println!("Try a larger number...");
-                } else if n > target {
-                    println!("Try a smaller number...");
-                } else {
-                    println!("Correct!");
-                    break;
-                }
+            Ok(n) if n < target => println!("Try a larger number..."),
+            Ok(n) if n > target => println!("Try a smaller number..."),
+            Ok(_) => {
+                println!("Correct!");
+                break;
             }
-            Err(e) => println!("Please enter a valid number... {}", e)
+            Err(e) => println!("Please enter a valid number... {}", e),
         };
-    };
+    }
 }
