@@ -8,7 +8,7 @@ fn main() {
 
         print!("Please enter a number: ");
         std::io::stdout().flush().expect("Could not flush stdout!");
-        std::io::stdin().read_line(&mut s).unwrap();
+        std::io::stdin().read_line(&mut s).expect("Could not read line!");
         let guess = s.trim_end();
 
         match guess.parse::<i32>() {
